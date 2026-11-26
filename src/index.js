@@ -1,4 +1,5 @@
 const express = require("express");
+const booksRouter = require("./routes/books");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,6 +11,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ message: "Books REST API is running" });
 });
+
+// Mount the books router
+app.use("/books", booksRouter);
 
 // Start the server
 app.listen(PORT, () => {
