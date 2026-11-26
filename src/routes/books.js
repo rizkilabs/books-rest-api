@@ -95,4 +95,21 @@ router.put("/:id", (req, res) => {
   res.status(200).json(books[index]);
 });
 
+// DELETE /books/:id - Remove a book
+router.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const index = books.findIndex((b) => b.id === id);
+
+  // Return 404 if the book does not exist
+  if (index === -1) {
+    return res.status(404).json({ error: "Book not found" });
+  }
+
+  // Remove the book from the array
+  books.splice(index, 1);
+
+  // 204 No Content: success with an empty response body
+  res.status(204).send();
+});
+
 module.exports = router;
